@@ -6,6 +6,7 @@ Using python [openCV](https://opencv-python-tutroals.readthedocs.io/en/latest/py
 
 To set up openCV you can install the dependencies using pip directly by running the following commands out of powershell (assuming your python version is set up correctly..)
 ```
+pip install python-opencv
 pip install numpy
 pip install matplotlib
 ```
