@@ -110,5 +110,38 @@ img1_g_lshift2 = cv2.warpAffine(img1_g, m, (cols, rows))
 cv2.imwrite('output/ps0-4-c-1.png', img1_g_lshift2)
 
 # 4d
+# Subtract the shifted image from the original
 diff = img1_g - img1_g_lshift2
 cv2.imwrite('output/ps0-4-d-1.png', diff)
+
+# 5a
+# Add gaussian noise to the green channel
+# Create an array for the gaussian noise & populate it with a random distribution
+gauss_g = copy.copy(img1_g)
+gauss_g[:,:,1] = 0
+mn_g = (0, 0, 0)
+sigma = 9
+sigma_g = (0, sigma, 0)
+cv2.randn(gauss_g, mn_g, sigma_g)
+
+# Copy the original image and add in the gaussian noise
+img1_guass_g = copy.copy(img1)
+img1_guass_g[:,:,1] += gauss_g[:,:,1]
+cv2.imwrite('output/ps0-5-a-1.png', img1_guass_g)
+
+# 5b
+# Add gaussian noise to the blue channel
+# Leave only the blue pixels
+img1_b = copy.copy(img1)
+img1_b[:,:,1] = 0
+img1_b[:,:,2] = 0
+
+# Create an array for the gaussian noise & populate it with a random distribution
+gauss_b = copy.copy(img1_b)
+sigma_b = (sigma, 0, 0)
+cv2.randn(gauss_b, mn_g, sigma_b)
+
+# Copy the original image and add in the gaussian noise
+img1_guass_b = copy.copy(img1)
+img1_guass_b[:,:,0] += gauss_b[:,:,0]
+cv2.imwrite('output/ps0-5-b-1.png', img1_guass_b)
